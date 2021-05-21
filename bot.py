@@ -40,7 +40,7 @@ def planet(update, context):
         'Libra': 'Весы',
         'Scorpio': 'Скорпион',
         'Sagittarius': 'Стрелец',
-        'Capricom': 'Козерог',
+        'Capricornus': 'Козерог',
         'Aquarius': 'Водолей',
         'Pisces': 'Рыбы'
         }
@@ -53,7 +53,7 @@ def planet(update, context):
         'Saturn': 'Сатурн',
         'Uranus': 'Уран',
         'Neptune': 'Нептун',
-        'Pluto': 'Плутон, хоть он больше и не планета',
+        'Pluto': 'Плутон, хоть он больше и не планета,',
         'Sun': 'Солнце',
         'Moon': 'Луна' 
         }
