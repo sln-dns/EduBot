@@ -1,9 +1,27 @@
 import ephem 
 from datetime import date
+import datetime
 import warnings 
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 text = input('ввести /planet и планету    ')
+date_year = int(input('введите дату, интересующую вас. Введите год в формате ХХХХ  '))
+date_month = int(input('введите номер месяца '))
+date_date = int(input('введите число '))
+
+try:
+    date_interes = datetime.datetime(date_year, date_month, date_date)
+    #print(date_interes)
+    #print(date.today())
+    #mars = ephem.Mars(date_interes)
+    #constellation = ephem.constellation(mars)
+    #print(constellation)
+except ValueError:
+    print('введена неверная дата, результат на сегодняшнюю дату')
+    date_interes = date.today()
+    #mars = ephem.Mars(date_interes)
+    #constellation = ephem.constellation(mars)
+    #print(constellation)
 
 #def planet(update, context):
 
@@ -21,7 +39,7 @@ dict_zodiack = {
         'Libra': 'Весы',
         'Scorpio': 'Скорпион',
         'Sagittarius': 'Стрелец',
-        'Capricom': 'Козерог',
+        'Capricornus': 'Козерог',
         'Aquarius': 'Водолей',
         'Pisces': 'Рыбы'
         }
@@ -41,11 +59,12 @@ dict_planet = {
 try:
     name_planet = text[1]
     name_planet = name_planet.title()
-    planet = getattr(ephem, name_planet)(date.today())
+    planet = getattr(ephem, name_planet)(date_interes)
     constellation = ephem.constellation(planet)
     name_planet = dict_planet[name_planet]
     constellation = dict_zodiack[constellation[1]]
-    print(f'Сегодня {name_planet} в созвездии {constellation}')
+    date_interes = date_interes.strftime("%d.%m.%y")
+    print(f'На дату {date_interes} небесное тело {name_planet}  находилось в созвездии {constellation}')
     #print(constellation[1])
 
 except TypeError: 
