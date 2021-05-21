@@ -6,26 +6,34 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 text = input('ввести /planet и планету    ')
 
 #def planet(update, context):
-list_planet = {'sun': 'Sun', 'moon': 'Moon', 'mercury': 'Mercury', 
-       'venus': 'Venus', 'mars': 'Mars', 'phobos': 'Phobos', 'deimos': 'Deimos', 
-       'jupiter': 'Jupiter', 'io': 'Io', 'europa': 'Europa', 'ganymede': 'Ganymede',
-       'callisto': 'Callisto', 'saturn': 'Saturn', 'mimas': 'Mimas', 'enceladus': 'Enceladus', 
-       'tethys': 'Tethys', 'dione': 'Dione', 'rhea': 'Rhea', 'titan': 'Titan', 
-       'hyperion': 'Hyperion', 'iapetus': 'Iapetus', 'uranus': 'Uranus', 'ariel': 'Ariel', 
-       'umbriel': 'Umbriel', 'titania': 'Titania', 'oberon': 'Oberon', 'miranda': 'Miranda', 
-       'neptune': 'Neptune','pluto': 'Pluto'
-    }
+
    
 text = text.lower()
 text = text.split()
 
+dict_zodiack = {
+        'Aries': 'Овен',
+        'Taurus': 'Телец',
+        'Gemini': 'Близнецы',
+        'Cancer': 'Рак',
+        'Leo': 'Лев',
+        'Virgo': 'Дева',
+        'Libra': 'Весы',
+        'Scorpio': 'Скорпион',
+        'Sagittarius': 'Стрелец',
+        'Capricom': 'Козерог',
+        'Aquarius': 'Водолей',
+        'Pisces': 'Рыбы'
+        }
+
 try:
     name_planet = text[1]
-    name_planet = list_planet.get(name_planet)
+    name_planet = name_planet.title()
     planet = getattr(ephem, name_planet)(date.today())
     constellation = ephem.constellation(planet)
+    print(dict_zodiack[constellation[1]])
     print(f'Сегодня {name_planet} в созвездии {constellation}')
-    print(constellation[1])
+    #print(constellation[1])
 
 except TypeError: 
     print('не припомню такой планеты. Попробуй ещё раз')

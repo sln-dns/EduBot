@@ -17,7 +17,6 @@ logging.basicConfig(filename='bot.log', level=logging.INFO)
 
 def greet_user(update, context):
     print('Вызван /start')
-    #print(update)
     update.message.reply_text("Привет, друг! Неужто ты нажал /start")
 
 def talk_to_me(update, context):
@@ -30,12 +29,28 @@ def planet(update, context):
     text  = update.message.text
     text = text.lower()
     text = text.split()
+
+    dict_zodiack = {
+        'Aries': 'Овен',
+        'Taurus': 'Телец',
+        'Gemini': 'Близнецы',
+        'Cancer': 'Рак',
+        'Leo': 'Лев',
+        'Virgo': 'Дева',
+        'Libra': 'Весы',
+        'Scorpio': 'Скорпион',
+        'Sagittarius': 'Стрелец',
+        'Capricom': 'Козерог',
+        'Aquarius': 'Водолей',
+        'Pisces': 'Рыбы'
+        }
     
     try:
         name_planet = text[1]
         name_planet = name_planet.title()        
         planet = getattr(ephem, name_planet)(date.today())
         constellation = ephem.constellation(planet)
+        constellation = dict_zodiack[constellation[1]]
         text = f'Сегодня {name_planet} в созвездии {constellation}'
         update.message.reply_text(text)
         
@@ -56,7 +71,7 @@ def main():
     dp.add_handler(CommandHandler('start', greet_user))
     dp.add_handler(CommandHandler('planet', planet))
     #dp.add_handler(MessageHandler(Filters.text, planet))
-    #dp.add_handler(MessageHandler(Filters.text, talk_to_me))
+    dp.add_handler(MessageHandler(Filters.text, talk_to_me))
     
 
 
