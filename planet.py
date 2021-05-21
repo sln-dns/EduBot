@@ -26,12 +26,25 @@ dict_zodiack = {
         'Pisces': 'Рыбы'
         }
 
+dict_planet = {
+    'Mercury': 'Меркурий',
+    'Venus': 'Венера',
+    'Mars': 'Марс',
+    'Jupiter': 'Юпитер',
+    'Saturn': 'Сатурн',
+    'Uranus': 'Уран',
+    'Neptune': 'Нептун',
+    'Pluto': 'Плутон, хоть он больше и не планета',
+    'Sun': 'Солнце',
+    'Moon': 'Луна' 
+    }
 try:
     name_planet = text[1]
     name_planet = name_planet.title()
     planet = getattr(ephem, name_planet)(date.today())
     constellation = ephem.constellation(planet)
-    print(dict_zodiack[constellation[1]])
+    name_planet = dict_planet[name_planet]
+    constellation = dict_zodiack[constellation[1]]
     print(f'Сегодня {name_planet} в созвездии {constellation}')
     #print(constellation[1])
 
